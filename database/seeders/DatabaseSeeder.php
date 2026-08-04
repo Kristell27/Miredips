@@ -39,5 +39,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password123'),
             'rol' => 'practicante',
         ]);
+        // Cargar productos de prueba
+        $this->call(ProductSeeder::class);
     }
 }
