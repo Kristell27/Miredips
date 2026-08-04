@@ -15,7 +15,7 @@ class ProductResource extends JsonResource
             'nombre' => $this->nombre,
             'categoria' => $this->categoria,
             'descripcion' => $this->descripcion,
-            'precio' => number_format($this->precio, 2),
+            'precio' => $this->precio,
             'stock' => $this->stock,
             'estado' => $this->estado,
             'estado_texto' => $this->estado ? 'Activo' : 'Inactivo',
