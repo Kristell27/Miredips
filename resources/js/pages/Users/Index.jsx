@@ -10,6 +10,7 @@ export default function UsersIndex({ users, filters }) {
     const handleSearch = (e) => {
         e.preventDefault();
         get('/users', {
+            ...data,
             preserveState: true,
         });
     };
@@ -105,7 +106,7 @@ export default function UsersIndex({ users, filters }) {
                                             {user.rol}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 text-sm text-gray-500">{user.created_at}</td>
+                                    <td className="px-6 py-4 text-sm text-gray-500">{new Date(user.created_at).toLocaleDateString('es-CO')}</td>
                                     <td className="px-6 py-4 text-right text-sm space-x-2">
                                         <Link
                                             href={`/users/${user.id}`}

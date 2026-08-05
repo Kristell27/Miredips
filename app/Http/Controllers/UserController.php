@@ -12,7 +12,6 @@ use Inertia\Response;
 
 class UserController extends Controller
 {
-    // Listar usuarios con paginación y filtros
     public function index(Request $request): Response
     {
         $query = User::query();
@@ -35,13 +34,11 @@ class UserController extends Controller
         ]);
     }
 
-    // Formulario para crear usuario
     public function create(): Response
     {
         return Inertia::render('Users/Create');
     }
 
-    // Guardar nuevo usuario
     public function store(UserRequest $request): RedirectResponse
     {
         User::create([
@@ -54,23 +51,20 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
     }
 
-    // Ver detalle de un usuario
     public function show(User $user): Response
     {
         return Inertia::render('Users/Show', [
-            'user' => new UserResource($user),
+            'user' => $user,
         ]);
     }
 
-    // Formulario para editar usuario
     public function edit(User $user): Response
     {
         return Inertia::render('Users/Edit', [
-            'user' => new UserResource($user),
+            'user' => $user,
         ]);
     }
 
-    // Actualizar usuario
     public function update(UserRequest $request, User $user): RedirectResponse
     {
         $data = $request->validated();
@@ -85,7 +79,6 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Usuario actualizado exitosamente.');
     }
 
-    // Eliminar usuario (soft delete)
     public function destroy(User $user): RedirectResponse
     {
         $user->delete();
@@ -93,7 +86,6 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Usuario eliminado exitosamente.');
     }
 
-    // Restaurar usuario eliminado
     public function restore(int $id): RedirectResponse
     {
         $user = User::withTrashed()->findOrFail($id);

@@ -36,20 +36,13 @@ export default function UsersShow({ user }) {
 
                     <div>
                         <p className="text-sm text-gray-500">Creado el</p>
-                        <p className="text-lg font-medium text-gray-800">{user.created_at}</p>
+                        <p className="text-lg font-medium text-gray-800">{new Date(user.created_at).toLocaleDateString('es-CO')}</p>
                     </div>
 
                     <div>
                         <p className="text-sm text-gray-500">Actualizado el</p>
-                        <p className="text-lg font-medium text-gray-800">{user.updated_at}</p>
+                        <p className="text-lg font-medium text-gray-800">{new Date(user.updated_at).toLocaleDateString('es-CO')}</p>
                     </div>
-
-                    {user.deleted_at && (
-                        <div>
-                            <p className="text-sm text-gray-500">Eliminado el</p>
-                            <p className="text-lg font-medium text-red-600">{user.deleted_at}</p>
-                        </div>
-                    )}
                 </div>
 
                 <div className="flex gap-3 mt-6 pt-4 border-t border-gray-200">
