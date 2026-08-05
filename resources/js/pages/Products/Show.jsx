@@ -43,7 +43,7 @@ export default function ProductsShow({ product }) {
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <p className="text-sm text-gray-500">Precio</p>
-                            <p className="text-lg font-medium text-gray-800">{product.precio}</p>
+                            <p className="text-lg font-medium text-gray-800">{formatPrecio(product.precio)}</p>
                         </div>
                         <div>
                             <p className="text-sm text-gray-500">Stock</p>
@@ -54,22 +54,22 @@ export default function ProductsShow({ product }) {
                     <div>
                         <p className="text-sm text-gray-500">Estado</p>
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            product.estado_texto === 'Activo'
+                            product.estado
                                 ? 'bg-green-100 text-green-800'
                                 : 'bg-red-100 text-red-800'
                         }`}>
-                            {product.estado_texto}
+                            {product.estado ? 'Activo' : 'Inactivo'}
                         </span>
                     </div>
 
                     <div>
                         <p className="text-sm text-gray-500">Creado el</p>
-                        <p className="text-base text-gray-700">{product.created_at}</p>
+                        <p className="text-base text-gray-700">{new Date(product.created_at).toLocaleDateString('es-CO')}</p>
                     </div>
 
                     <div>
                         <p className="text-sm text-gray-500">Actualizado el</p>
-                        <p className="text-base text-gray-700">{product.updated_at}</p>
+                        <p className="text-base text-gray-700">{new Date(product.updated_at).toLocaleDateString('es-CO')}</p>
                     </div>
                 </div>
 

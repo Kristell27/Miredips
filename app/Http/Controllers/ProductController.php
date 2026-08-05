@@ -33,7 +33,6 @@ class ProductController extends Controller
 
         $products = $query->orderBy('created_at', 'desc')->paginate(10);
 
-        // Obtener categorías únicas para el filtro
         $categories = Product::distinct()->pluck('categoria')->sort()->values();
 
         return Inertia::render('Products/Index', [
@@ -43,13 +42,11 @@ class ProductController extends Controller
         ]);
     }
 
-    // Formulario para crear producto
     public function create(): Response
     {
         return Inertia::render('Products/Create');
     }
 
-    // Guardar nuevo producto
     public function store(ProductRequest $request): RedirectResponse
     {
         Product::create($request->validated());
@@ -61,7 +58,7 @@ class ProductController extends Controller
     public function show(Product $product): Response
     {
         return Inertia::render('Products/Show', [
-            'product' => new ProductResource($product),
+            'product' => $product,
         ]);
     }
 
@@ -69,11 +66,10 @@ class ProductController extends Controller
     public function edit(Product $product): Response
     {
         return Inertia::render('Products/Edit', [
-            'product' => new ProductResource($product),
+            'product' => $product,
         ]);
     }
 
-    // Actualizar producto
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
         $product->update($request->validated());
@@ -81,7 +77,6 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Producto actualizado exitosamente.');
     }
 
-    // Eliminar producto (soft delete)
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
@@ -89,7 +84,6 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Producto eliminado exitosamente.');
     }
 
-    // Restaurar producto eliminado
     public function restore(int $id): RedirectResponse
     {
         $product = Product::withTrashed()->findOrFail($id);

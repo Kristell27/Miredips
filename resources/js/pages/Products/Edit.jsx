@@ -7,7 +7,7 @@ export default function ProductsEdit({ product }) {
         nombre: product.nombre,
         categoria: product.categoria,
         descripcion: product.descripcion || '',
-        precio: product.precio.replace(/\./g, '').replace(',', '.'),
+        precio: product.precio,
         stock: product.stock,
         estado: product.estado,
     });

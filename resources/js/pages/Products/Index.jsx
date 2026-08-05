@@ -11,6 +11,7 @@ export default function ProductsIndex({ products, filters, categories }) {
     const handleSearch = (e) => {
         e.preventDefault();
         get('/products', {
+            ...data,
             preserveState: true,
         });
     };
@@ -115,7 +116,7 @@ export default function ProductsIndex({ products, filters, categories }) {
                                     <td className="px-6 py-4 text-sm text-gray-900 font-medium">{product.codigo}</td>
                                     <td className="px-6 py-4 text-sm text-gray-900">{product.nombre}</td>
                                     <td className="px-6 py-4 text-sm text-gray-600">{product.categoria}</td>
-                                    <td className="px-6 py-4 text-sm text-gray-900 text-right font-medium">{product.precio}</td>
+                                    <td className="px-6 py-4 text-sm text-gray-900 text-right font-medium">{formatPrecio(product.precio)}</td>
                                     <td className="px-6 py-4 text-sm text-gray-900 text-right">{product.stock}</td>
                                     <td className="px-6 py-4 text-center">
                                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
